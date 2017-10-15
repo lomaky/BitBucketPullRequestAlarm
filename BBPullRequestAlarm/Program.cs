@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Castle.Windsor;
+using Castle.Windsor.Installer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +10,7 @@ namespace BBPullRequestAlarm
 {
     static class Program
     {
+        public static IWindsorContainer container;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,6 +19,8 @@ namespace BBPullRequestAlarm
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            container = new WindsorContainer();
+            container.Install(FromAssembly.This());
             Application.Run(new Form1());
         }
     }

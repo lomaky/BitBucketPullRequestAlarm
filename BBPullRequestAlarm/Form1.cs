@@ -1,29 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NumatoRelayHelper;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BBPullRequestAlarm
 {
     public partial class Form1 : Form
     {
-        RelayHelper _relayHelper;
+        IRelayHelper _relayHelper;
 
         public Form1()
         { 
             InitializeComponent();
-            _relayHelper = new RelayHelper(3);
+            _relayHelper = Program.container.Resolve<IRelayHelper>();  
+            _relayHelper.Initialize();
             bwMonitor.RunWorkerAsync();
         }
 
         private void bwMonitor_DoWork(object sender, DoWorkEventArgs e)
         {
-            _relayHelper.Alarm(5);
+            _relayHelper.Alarm();
         }
 
         private void bwMonitor_ProgressChanged(object sender, ProgressChangedEventArgs e)
