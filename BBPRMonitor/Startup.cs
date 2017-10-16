@@ -27,7 +27,8 @@ namespace BBPRMonitor
         public void StartUp()
         {
             string baseAddress = ConfigurationManager.AppSettings["HangfireDashboardURL"];
-            _server = new BackgroundJobServer();
+            //As SQLite cannot handle concurrent request, set WorkerCount = 1.
+            _server = new BackgroundJobServer(new BackgroundJobServerOptions { WorkerCount = 1 });
             Console.WriteLine("Hangfire Server started.");
 
             ConfigureLogging();
