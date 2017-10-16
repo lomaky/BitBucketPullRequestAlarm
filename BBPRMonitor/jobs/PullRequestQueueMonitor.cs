@@ -28,6 +28,7 @@ namespace BBPRMonitor
         public void ExecuteAction(PerformContext context) {
             var console = new HangFireConsole(context, context.WriteProgressBar());
             console.Write("Initializing PullRequestQueueMonitor Service ...", HangFireConsole.ActivityType.Info);
+            try { console.Progress(10); } catch { }
 
             var _client = new AmazonSQSClient(
                   awsAccessKeyId: AccessKeyId,
@@ -40,6 +41,7 @@ namespace BBPRMonitor
             console.Write("Querying Queue " + SQSUrl + "...", HangFireConsole.ActivityType.Info);
 
             var _response = _client.ReceiveMessage(_request);
+            try { console.Progress(50); } catch { }
 
             if (_response.Messages.Count > 0)
             {
@@ -51,11 +53,13 @@ namespace BBPRMonitor
                     _relayHelper.Alarm();
                 })).Start();
 
+                try { console.Progress(70); } catch { }
                 _client.PurgeQueue(new PurgeQueueRequest { QueueUrl = SQSUrl });
 
                 console.Write("Purging Queue", HangFireConsole.ActivityType.Info);
-
             }
+
+            try { console.Progress(100); } catch { }
 
             console.Write("Finalizing PullRequestQueueMonitor Service.", HangFireConsole.ActivityType.Info);
 
