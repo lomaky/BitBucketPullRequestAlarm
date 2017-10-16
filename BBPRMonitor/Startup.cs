@@ -1,12 +1,9 @@
 ﻿using Hangfire;
 using Hangfire.Console;
+using Hangfire.SQLite;
 using Microsoft.Owin.Hosting;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BBPRMonitor
 {
@@ -19,7 +16,7 @@ namespace BBPRMonitor
         public Startup()
         {
             // Hangfire Connection String
-            GlobalConfiguration.Configuration.UseSqlServerStorage(ConfigurationManager.AppSettings["HangfireSqlConn"]);
+            GlobalConfiguration.Configuration.UseSQLiteStorage(ConfigurationManager.AppSettings["HangfireSQLiteConn"]);
         }
 
         protected override void OnStart(string[] args)
