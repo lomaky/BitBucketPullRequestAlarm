@@ -101,6 +101,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="hangfire\HangFireConsole.cs" />
     <Compile Include="hangfire\MonitorDashboard.cs" />
     <Compile Include="hangfire\OwinStartupObjects.cs" />
     <Compile Include="Program.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Startup.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="WindsorInstaller.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
