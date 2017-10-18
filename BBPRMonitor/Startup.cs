@@ -2,6 +2,7 @@
 using Hangfire.Console;
 using Hangfire.SQLite;
 using Microsoft.Owin.Hosting;
+using NumatoRelayHelper;
 using System;
 using System.Configuration;
 
@@ -69,6 +70,9 @@ namespace BBPRMonitor
             {
                 RecurringJob.RemoveIfExists("PR_QUEUE_MONITOR_SERVICE");
             }
+            // Initial test
+            var relayHelperTest = Program.container.Resolve<IRelayHelper>();
+            relayHelperTest.Alarm();
         }
 
         public new void Dispose()
