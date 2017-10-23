@@ -21,12 +21,18 @@ namespace BBPRAlarm
 
             var relayHelperTest = container.Resolve<IRelayHelper>();
 
-            for (int i = 0; i < 10; i++)
+            Console.WriteLine("Testing NUMATO...");
+            relayHelperTest.Alarm();
+
+            var prSearcher = new PullRequestQueueMonitor();
+
+            do
             {
                 Console.WriteLine("Processing SQS");
-                relayHelperTest.Alarm();
-                System.Threading.Thread.Sleep(10000);
-            }
+                prSearcher.ExecuteAction();
+                System.Threading.Thread.Sleep(15000);
+
+            } while (true);
         }
     }
 }
