@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumatoRelayHelper", "Numato
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBPRMonitor", "BBPRMonitor\BBPRMonitor.csproj", "{6CA6A76B-DD39-48BA-94C3-717AAD98F909}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBPRAlarm", "BBPRAlarm\BBPRAlarm.csproj", "{FA1998EF-CB82-4A94-94F8-5D9616B8DD42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{6CA6A76B-DD39-48BA-94C3-717AAD98F909}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CA6A76B-DD39-48BA-94C3-717AAD98F909}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CA6A76B-DD39-48BA-94C3-717AAD98F909}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA1998EF-CB82-4A94-94F8-5D9616B8DD42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA1998EF-CB82-4A94-94F8-5D9616B8DD42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA1998EF-CB82-4A94-94F8-5D9616B8DD42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA1998EF-CB82-4A94-94F8-5D9616B8DD42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

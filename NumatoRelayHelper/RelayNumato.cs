@@ -18,7 +18,7 @@ namespace NumatoRelayHelper
             {
                 _serialPort = new System.IO.Ports.SerialPort();
                 _serialPort.BaudRate = 9600;
-                _serialPort.PortName = "COM" + RelaySettings.COMPort;
+                _serialPort.PortName = RelaySettings.COMPort;
                 _serialPort.Open();
                 _initialised = true;
             }
