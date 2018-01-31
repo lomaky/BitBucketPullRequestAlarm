@@ -23,7 +23,7 @@ namespace BBPRMonitor
         public string SQSUrl { get { return ConfigurationManager.AppSettings["SQSUrl"]; } }
 
 
-        [DisableConcurrentExecution(60)]
+        [DisableConcurrentExecution(120)]
         [AutomaticRetry(Attempts = 0, OnAttemptsExceeded = AttemptsExceededAction.Delete)]
         public void ExecuteAction(PerformContext context)
         {
@@ -34,7 +34,7 @@ namespace BBPRMonitor
             try { console.Progress(25); } catch { }
             for (int i = 1; i < 4; i++)
             {
-                Thread.Sleep(15000);
+                Thread.Sleep(30000);
                 QueryQueue(console);
                 try { console.Progress((i+1)*15+10); } catch { }
             }

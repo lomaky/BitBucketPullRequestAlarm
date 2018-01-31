@@ -48,6 +48,24 @@ namespace NumatoRelayHelper
             catch { }
         }
 
+        public void Test()
+        {
+            Initialize();
+            try
+            {
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
+                Console.WriteLine("Relay On for " + RelaySettings.OnForSeconds + " seconds");
+                Thread.Sleep(5000);
+                Console.WriteLine("Relay Off (after " + stopwatch.Elapsed.TotalSeconds + " secods)");
+            }
+            catch (Exception ex)
+            {
+                ClosePort();
+                throw ex;
+            }
+        }
+
         ~RelayMock()
         {
             Console.WriteLine("Relay Destructor");

@@ -5,5 +5,7 @@
         void Initialize();
 
         void Alarm();
+
+        void Test();
     }
 }

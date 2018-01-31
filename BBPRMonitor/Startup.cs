@@ -72,7 +72,7 @@ namespace BBPRMonitor
             }
             // Initial test
             var relayHelperTest = Program.container.Resolve<IRelayHelper>();
-            relayHelperTest.Alarm();
+            relayHelperTest.Test();
         }
 
         public new void Dispose()

@@ -55,6 +55,28 @@ namespace NumatoRelayHelper
             catch { }
         }
 
+        public void Test()
+        {
+            Initialize();
+            try
+            {
+                _serialPort.DiscardInBuffer();
+                _serialPort.Write("relay on 1\r");
+                Thread.Sleep(10);
+                _serialPort.DiscardInBuffer();
+                Thread.Sleep(5000);
+                _serialPort.Write("relay off 1\r");
+                _serialPort.DiscardInBuffer();
+                Thread.Sleep(10);
+                _serialPort.DiscardInBuffer();
+            }
+            catch (Exception ex)
+            {
+                ClosePort();
+                throw ex;
+            }
+        }
+
         ~RelayNumato()
         {
             ClosePort();
