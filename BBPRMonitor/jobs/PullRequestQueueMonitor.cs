@@ -7,7 +7,9 @@ using NumatoRelayHelper;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,8 +21,9 @@ namespace BBPRMonitor
         IRelayHelper _relayHelper;
 
         public string AccessKeyId { get { return ConfigurationManager.AppSettings["AccessKeyId"]; } }
-        public string SecretKey { get { return ConfigurationManager.AppSettings["SecretKey"];  } }
+        public string SecretKey { get { return ConfigurationManager.AppSettings["SecretKey"]; } }
         public string SQSUrl { get { return ConfigurationManager.AppSettings["SQSUrl"]; } }
+        public string PrSoundPath { get { return ConfigurationManager.AppSettings["PrSoundPath"]; } }
 
 
         [DisableConcurrentExecution(120)]
@@ -36,7 +39,7 @@ namespace BBPRMonitor
             {
                 Thread.Sleep(30000);
                 QueryQueue(console);
-                try { console.Progress((i+1)*15+10); } catch { }
+                try { console.Progress((i + 1) * 15 + 10); } catch { }
             }
 
             try { console.Progress(100); } catch { }
@@ -53,8 +56,8 @@ namespace BBPRMonitor
                   region: Amazon.RegionEndpoint.USEast1);
 
             var _request = new ReceiveMessageRequest
-            { QueueUrl = SQSUrl, MaxNumberOfMessages = 10 }; 
-            
+            { QueueUrl = SQSUrl, MaxNumberOfMessages = 10 };
+
             console.Write("Querying Queue " + SQSUrl + "...", HangFireConsole.ActivityType.Info);
 
             var _response = _client.ReceiveMessage(_request);
@@ -62,6 +65,21 @@ namespace BBPRMonitor
             if (_response.Messages.Count > 0)
             {
                 console.Write(_response.Messages.Count + " PullRequest(s) Found", HangFireConsole.ActivityType.Info);
+
+                try
+                {
+                    if (File.Exists(PrSoundPath))
+                        (new Thread(() =>
+                        {
+                            try
+                            {
+                                var prSound = new SoundPlayer(PrSoundPath);
+                                prSound.Play();
+                            }
+                            catch { }
+                        })).Start();
+                }
+                catch { }
 
                 (new Thread(() =>
                 {
